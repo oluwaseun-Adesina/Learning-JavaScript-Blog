@@ -9,11 +9,30 @@ app.set('view engine', 'ejs' );
 // listen for request 
 app.listen(3000);
 
+
+//middleware and static file
+app.use(express.static('public'));
+
+app.use((req, res, next) => { 
+    console.log('new request made: ');
+    console.log('host: ', req.hostname);
+    console.log('path: ', req.path);
+    console.log('method: ', req.method);
+    next();
+});
+
+app.use((req, res, next) => {
+    console.log('In the next MiddleWare');
+    next();
+});
+
 app.get('/', (req, res)=> {
     //res.send('<p> Home Page</p>');
     //res.sendFile('./views/index.html',{root:__dirname});
     const blogs = [
-        
+        {title: 'Yoshi finds eggs', snippet: 'Testing out Middleware in Node Js'},
+        {title: 'Using Middleware', snippet: 'Experiment with Middleware'},
+        {title: 'New Message', snippet: 'Why are you still in school? '},
     ];
     res.render('index', {title: "Home", blogs});
 });
