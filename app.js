@@ -1,40 +1,31 @@
 const express = require("express");
+const morgan = require('morgan')
+const mongoose = require('mongoose')
+const Blog = require('./models/blog')
 
 // express app
 const app = express();
 
+//CONNECT TO MONGO DB
+const dbURI = 'mongodb+srv://oluwaseun:Pass_Word_123@cluster0.3bxcv.mongodb.net/node-js-tuts?retryWrites=true&w=majority';
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then((result) => app.listen(3000))
+    .catch((err) => console.log(err));
 // register view engine
 app.set('view engine', 'ejs' );
 
-// listen for request 
-app.listen(3000);
+//routes
 
+app.use(morgan('dev'));
 
 //middleware and static file
-app.use(express.static('public'));
+app.use(express.static('public')); 
 
-app.use((req, res, next) => { 
-    console.log('new request made: ');
-    console.log('host: ', req.hostname);
-    console.log('path: ', req.path);
-    console.log('method: ', req.method);
-    next();
-});
-
-app.use((req, res, next) => {
-    console.log('In the next MiddleWare');
-    next();
-});
 
 app.get('/', (req, res)=> {
     //res.send('<p> Home Page</p>');
     //res.sendFile('./views/index.html',{root:__dirname});
-    const blogs = [
-        {title: 'Yoshi finds eggs', snippet: 'Testing out Middleware in Node Js'},
-        {title: 'Using Middleware', snippet: 'Experiment with Middleware'},
-        {title: 'New Message', snippet: 'Why are you still in school? '},
-    ];
-    res.render('index', {title: "Home", blogs});
+   res.redirect('/blogs');
 });
 
 app.get('/about', (req, res)=> {
@@ -43,6 +34,18 @@ app.get('/about', (req, res)=> {
     res.render('about',  {title: "About"})
 });
  
+//blog 
+app.get('/blogs', (req, res) =>{
+    Blog.find().sort({ createdAt: -1})
+        .then((result) =>{
+            res.render('index', {title: 'All Blogs', blogs: result})
+        })
+        .catch((err) =>{
+            console.log(err);
+        })
+})
+
+
 app.get('/blogs/create', (req, res) => {
     res.render('create',  {title: "Create a New Blog"});
 })
