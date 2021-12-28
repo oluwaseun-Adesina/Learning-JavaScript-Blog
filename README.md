@@ -1,7 +1,9 @@
 # Learning-JavaScript-Blog-
 
-#npm install to install all dependency 
+# npm install 
+To install all dependency 
 
-#npm start to start the server
+# npm start 
+To start the server
 
-#Access the app on localhost:3000
+# Access the app on localhost:3000
