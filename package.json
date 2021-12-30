@@ -2,13 +2,11 @@
   "name": "servers",
   "version": "1.0.0",
   "main": "app.js",
-  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-
   "author": "Oluwaseun",
   "license": "ISC",
   "dependencies": {
@@ -20,5 +18,13 @@
     "nodemon": "^2.0.15",
     "serve": "^13.0.2"
   },
-  "description": ""
+  "description": "To install all dependency",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oluwaseun-Adesina/Learning-JavaScript-Blog-.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oluwaseun-Adesina/Learning-JavaScript-Blog-/issues"
+  },
+  "homepage": "https://github.com/oluwaseun-Adesina/Learning-JavaScript-Blog-#readme"
 }
