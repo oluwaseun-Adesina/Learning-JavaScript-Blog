@@ -4,13 +4,10 @@
   "main": "app.js",
   
   "scripts": {
-    "dev": "npm start",
-    "start": "serve -s build",
-    "build": "npm build",
-    "test": "npm test --env=jsdom",
-    "eject": "npm eject",
-    "heroku-postbuild": "npm run build"
-    },
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+
   "author": "Oluwaseun",
   "license": "ISC",
   "dependencies": {
