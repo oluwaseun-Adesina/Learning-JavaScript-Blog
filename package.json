@@ -4,11 +4,11 @@
   "main": "app.js",
   
   "scripts": {
-    "dev": "react-scripts start",
+    "dev": "npm start",
     "start": "serve -s build",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "build": "npm build",
+    "test": "npm test --env=jsdom",
+    "eject": "npm eject",
     "heroku-postbuild": "npm run build"
     },
   "author": "Oluwaseun",
