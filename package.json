@@ -10,9 +10,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
-    }
-
-  "author": "",
+    },
+  "author": "Oluwaseun",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.6",
