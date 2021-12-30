@@ -9,8 +9,11 @@ const app = express();
 //CONNECT TO MONGO DB
 const dbURI = 'mongodb+srv://oluwaseun:Pass_Word_123@cluster0.3bxcv.mongodb.net/node-js-tuts?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((result) => app.listen(3000))
-    .catch((err) => console.log(err));
+    //.then((result) => app.listen(3000))
+    .then((result) => app.listen(process.env.PORT || 3000, function() {
+        console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+      }))
+    .catch((err) => console.log(err))
 // register view engine
 app.set('view engine', 'ejs');
 
