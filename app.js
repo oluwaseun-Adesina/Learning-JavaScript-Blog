@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogroutes');
+var port = process.env.PORT || 3000;
 
 // express app
 const app = express();
@@ -10,7 +11,7 @@ const app = express();
 const dbURI = 'mongodb+srv://oluwaseun:Pass_Word_123@cluster0.3bxcv.mongodb.net/node-js-tuts?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     //.then((result) => app.listen(3000))
-    .then((result) => app.listen(process.env.PORT || 3000, function() {
+    .then((result) => app.listen(port, function() {
         console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
       }))
     .catch((err) => console.log(err))
