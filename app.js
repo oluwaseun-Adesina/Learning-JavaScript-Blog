@@ -8,7 +8,8 @@ var port = process.env.PORT || 3000;
 const app = express();
 
 //CONNECT TO MONGO DB
-const dbURI = 'mongodb+srv://oluwaseun:Pass_Word_123@cluster0.3bxcv.mongodb.net/node-js-tuts?retryWrites=true&w=majority';
+//const dbURI = 'mongodb+srv://oluwaseun:Pass_Word_123@cluster0.3bxcv.mongodb.net/node-js-tuts?retryWrites=true&w=majority';
+process.env.DB_URL
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     //.then((result) => app.listen(3000))
     .then((result) => app.listen(port, function() {
