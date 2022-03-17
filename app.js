@@ -2,6 +2,9 @@ const express = require("express");
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const blogRoutes = require('./routes/blogRoutes');
+const authRoute = require('./routes/authRoutes')
+const cookieParser = require('cookie-parser')
+const { requireAuth, checkUser } = require('./middleware/authMiddleware')
 require('dotenv').config()
 var port = process.env.PORT || 3000;
 // express app
@@ -24,8 +27,11 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+app.use(express.json());
+app.use(cookieParser());
 
-app.get('/', (req, res) => {
+app.get('*', checkUser);
+app.get('/', requireAuth, (req, res) => {
     //res.send('<p> Home Page</p>');
     //res.sendFile('./views/index.html',{root:__dirname});
     res.redirect('/blogs');
@@ -36,7 +42,9 @@ app.get('/about', (req, res) => {
 });
 
 //blog routes
+app.use(authRoute)
 app.use('/blogs', blogRoutes);
+//app.use(authRoute)
 // 404 page
 app.use((req, res) => {
     //res.status(404).sendFile("./views/404.html", {root: __dirname});
