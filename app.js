@@ -30,12 +30,14 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
 
+
 app.get('*', checkUser);
-app.get('/', requireAuth, (req, res) => {
+app.get('/', (req, res) => {
     //res.send('<p> Home Page</p>');
     //res.sendFile('./views/index.html',{root:__dirname});
     res.redirect('/blogs');
 });
+app.get('')
 
 app.get('/about', (req, res) => {
     res.render('about', { title: "About" })
