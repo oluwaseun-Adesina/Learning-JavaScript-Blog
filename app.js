@@ -6,7 +6,7 @@ const authRoute = require('./routes/authRoutes')
 const cookieParser = require('cookie-parser')
 const { requireAuth, checkUser } = require('./middleware/authMiddleware')
 require('dotenv').config()
-var port = process.env.PORT || 4000;
+var port = process.env.PORT || 3000;
 // express app
 const app = express();
 
