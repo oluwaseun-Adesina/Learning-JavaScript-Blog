@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const { requireAuth, checkUser } = require('./middleware/authMiddleware')
 const dotenv = require('dotenv')
 dotenv.config();
-var port = process.env.PORT || 3000;
+// var port = process.env.PORT || 3000;
 // express app
 const app = express();
 
@@ -15,7 +15,7 @@ const app = express();
 
 mongoose.connect(process.env.dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     //.then((result) => app.listen(3000))
-    .then((result) => app.listen(port, function() {
+    .then((result) => app.listen(process.env.PORT || 3000, function() {
         console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
       }))
     .catch((err) => console.log(err))
