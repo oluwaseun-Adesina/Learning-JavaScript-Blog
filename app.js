@@ -5,15 +5,15 @@ const blogRoutes = require('./routes/blogRoutes');
 const authRoute = require('./routes/authRoutes')
 const cookieParser = require('cookie-parser')
 const { requireAuth, checkUser } = require('./middleware/authMiddleware')
-require('dotenv').config()
+const dotenv = require('dotenv')
+dotenv.config();
 var port = process.env.PORT || 3000;
 // express app
 const app = express();
 
 //CONNECT TO MONGO DB
 
-const dbURI = process.env.DB_URL
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     //.then((result) => app.listen(3000))
     .then((result) => app.listen(port, function() {
         console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
