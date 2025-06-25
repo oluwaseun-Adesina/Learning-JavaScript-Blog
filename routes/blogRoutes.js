@@ -1,11 +1,18 @@
 const express = require('express');
 const blogController = require('../controllers/blogController');
 const { requireAuth, checkUser } = require('../middleware/authMiddleware');
-
+const rateLimit = require('express-rate-limit'); // Import rate limiting middleware
 
 const router = express.Router();
 
 //router.get('*', checkUser);
+
+// Configure rate limiter: maximum of 100 requests per 15 minutes
+const deleteRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many delete requests from this IP, please try again later.',
+});
 
 router.get('/', blogController.blog_index);
 
@@ -15,8 +22,7 @@ router.get('/create', blogController.blog_create_get);
 
 router.get('/:id', blogController.blog_details);
 
-router.delete('/:id', blogController.blog_delete);
-
-
+// Apply rate limiter to the delete route
+router.delete('/:id', deleteRateLimiter, blogController.blog_delete);
 
 module.exports = router;
